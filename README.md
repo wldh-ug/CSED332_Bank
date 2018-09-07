@@ -23,4 +23,4 @@ The comment introduction says "The balance of HighInterest account should always
 
 #### Floating Point Problem
 
-The test code from skeleton code says that the result of `100000. * Math.pow(1.01, 20)` is **122019.0039947967<u>2</u>**. But in my execution, the result was **122019.0039947967**. I still does not know how that **<u>2</u>** comes.
+The test code from skeleton code says that the result of `100000. * Math.pow(1.01, 20)` is **122019.0039947967**<b><u>2</u></b>. But in my execution, the result was **122019.0039947967**. I still does not know how that <b><u>2</u></b> comes.
