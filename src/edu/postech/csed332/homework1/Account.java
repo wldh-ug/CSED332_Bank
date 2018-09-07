@@ -44,7 +44,7 @@ interface Account {
 	 *  Withdraw as much money as a given amount factor to the given account. 
 	 *  	You have to use exception handler to handle the case that the balance 
 	 *  of account is smaller than the amount of money that you want to withdraw.
-	 *  Please use NegativeException we gave you.
+	 *  Please use NotEnoughException we gave you.
 	 *  
 	 *  @param amount withdraw amount 
 	 */

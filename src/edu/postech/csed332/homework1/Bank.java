@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * The Bank class has all account information that have been created so far. The
@@ -25,7 +24,15 @@ public class Bank {
 	 * @param bankname the name of bank
 	 */
 	Bank(String bankname) {
-		// TODO implement this
+
+		// NOTE: Implemented
+
+		this.name = bankname;
+
+		this.accNumCounter = 100000;
+		this.accs = new HashMap<>();
+		this.accsByName = new HashMap<>();
+
 	}
 
 	/**
@@ -36,7 +43,29 @@ public class Bank {
 	 * @return list of accounts in the given interval
 	 */
 	List<Account> findAccountsInInterval(int lower, int upper) {
-		// TODO implement this
+		
+		// NOTE: Implemented
+
+		List<Account> founds = new ArrayList<>();
+
+		// Fix lower if out of range
+		if (lower < 100000)
+			lower = 100000;
+
+		// Fix upper if out of range
+		if (upper >= accNumCounter)
+			upper = accNumCounter - 1;
+		
+		// If lower and upper is not in condition, return empty
+		if (lower > upper)
+			return founds;
+		
+		// Gather accounts
+		for (int i = lower; i <= upper; i++)
+			founds.add(accs.get(i));
+
+		return founds;
+		
 	}
 
 	/**
@@ -49,7 +78,35 @@ public class Bank {
 	 * @return requested account
 	 */
 	Account findAccountByName(String name) throws NotFoundException {
-		// TODO implement this
+		
+		// NOTE: Implemented
+
+		/**
+		 * HACK: If multiple accounts are found by the given name
+		 * Java core Map implementations does not allow duplicate keys.
+		 * So when new accounts are added at {@link #createAccount(String,
+		 * ACCTYPE, double)} method, {@link #accsByName} will not updated
+		 * if there exists an account with same name.
+		 */
+
+		Account found = null;
+
+		try {
+
+			found = accsByName.get(name);
+
+		} catch (Exception e) {
+
+			System.err.println(e.toString());
+			throw new NotFoundException();
+
+		}
+
+		if (found == null)
+			throw new NotFoundException();
+		else
+			return found;
+
 	}
 
 	/**
@@ -62,7 +119,30 @@ public class Bank {
 	 * @return the created account
 	 */
 	Account createAccount(String name, ACCTYPE accType, double initial) {
-		// TODO implement this
+		
+		// NOTE: Implemented
+
+		Account newbie = null;
+
+		// Give informations
+		if (accType == ACCTYPE.HIGH)
+			newbie = new HighInterest(accNumCounter, name, initial);
+		else
+			newbie = new LowInterest(accNumCounter, name, initial);
+		
+		// Add new account to {@link #accsByName}
+		try {
+			findAccountByName(newbie.getOwner());
+		} catch (Exception e) {
+			// If no account exist with given name
+			accsByName.put(newbie.getOwner(), newbie);
+		}
+
+		// Add new account to {@link #accs}
+		accs.put(accNumCounter++, newbie);
+		
+		return newbie;
+
 	}
 
 	/**
@@ -72,14 +152,37 @@ public class Bank {
 	 * maximum balance, return the lowest account number.
 	 */
 	Account maxBalance() throws EmptyException {
-		// TODO implement this
+
+		// NOTE: Implemented
+		
+		if (accNumCounter == 100000)
+			throw new EmptyException();
+
+		double max = -1;
+		Account plute = null;
+		
+		for (int i = 100000; i < accNumCounter; i++) {
+
+			Account person = accs.get(i);
+
+			if (person.getBalance() > max) {
+
+				max = person.getBalance();
+				plute = person;
+
+			}
+
+		}
+
+		return plute;
+
 	}
 
 	/**
 	 * Transfer the money as much as given amount factor from src account to dst
 	 * account. You have to use exception handler to handle the case that the
 	 * balance of source account is smaller than amount of money to send. Please use
-	 * NegativeException we gave you. (You can not send money from one bank to
+	 * NotEnoughException we gave you. (You can not send money from one bank to
 	 * another.
 	 * 
 	 * @param src    the account to send money
@@ -87,7 +190,18 @@ public class Bank {
 	 * @param amount amount of money to send
 	 */
 	void transfer(Account src, Account dst, double amount) throws NotEnoughException {
-		// TODO implement this
+		
+		// NOTE: Implemented
+
+		/**
+		 * HACK: About throwing NotEnoughException
+		 * {@link Account#withdraw(double)} will throw NotEnoughException instead
+		 * of this function.
+		 */
+
+		src.withdraw(amount);
+		dst.deposit(amount);
+
 	}
 
 	public static void main(String[] args) {
