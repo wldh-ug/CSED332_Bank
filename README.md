@@ -19,8 +19,8 @@ Answers to questions in [homework1.pdf](homework1.pdf).
 
 #### Strange Limitation: "The balance of HighInterest account should always bigger or equal to 1000."
 
-The comment introduction on [HighInterest.java](src/edu/postech/csed332/homework1) says "The balance of HighInterest account should always bigger or equal to 1000." So how about when create high interest account with initial balance lower than 1000? Unfortunately, in test main code, there was no any exception handler on *createAccount* function. **So, in my code, when if the initial value is lower than 1000 in creating high interest account, it will modified to 1000 to meet the limitation.**
+The comment introduction on [HighInterest.java](src/edu/postech/csed332/homework1/HighInterest.java#L7) says "The balance of HighInterest account should always bigger or equal to 1000." So how about when create high interest account with initial balance lower than 1000? Unfortunately, in test main code, there was no any exception handler on *createAccount* function. **So, in my code, when if the initial value is lower than 1000 in creating high interest account, it will modified to 1000 to meet the limitation.**
 
 #### Floating Point Problem
 
-The test code from skeleton code says that the result of `100000. * Math.pow(1.01, 20)` is **122019.0039947967**<b><u>2</u></b>. But in my execution, the result was **122019.0039947967**. I still does not know how that <b><u>2</u></b> comes.
+The test code from skeleton code says that the result of `100000. * Math.pow(1.01, 20)` is **122019.0039947967**<b><u>*2*</u></b>. But in my execution, the result was **122019.0039947967**. I still does not know how that <b><u>*2*</u></b> comes.
