@@ -10,13 +10,13 @@ class HighInterest implements Account {
 
     // NOTE: Implemented
 
-    double accountNumber;
+    int accountNumber;
     double balance;
     String owner;
 
     public HighInterest(int an, String n, double b) {
 
-        this.accountNumber = (double) an;
+        this.accountNumber = an;
 
         /**
          * HACK: "The balance should always bigger or equal to 1000."
@@ -46,7 +46,7 @@ class HighInterest implements Account {
     }
 
     @Override
-    public double getAccountNumber() {
+    public int getAccountNumber() {
         return accountNumber;
     }
 

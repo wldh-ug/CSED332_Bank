@@ -9,13 +9,13 @@ class LowInterest implements Account {
     
     // NOTE: Implemented
 
-    double accountNumber;
+    int accountNumber;
     double balance;
     String owner;
 
     public LowInterest(int an, String n, double b) {
 
-        this.accountNumber = (double) an;
+        this.accountNumber = an;
 
         if (b < 0)
             this.balance = 0;
@@ -37,7 +37,7 @@ class LowInterest implements Account {
     }
 
     @Override
-    public double getAccountNumber() {
+    public int getAccountNumber() {
         return accountNumber;
     }
 

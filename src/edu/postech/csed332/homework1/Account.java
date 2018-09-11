@@ -10,7 +10,7 @@ interface Account {
 	 *  
 	 *  @return the account number
 	 */
-	double getAccountNumber();
+	int getAccountNumber();
 	/**
 	 *  Returns the account balance 
 	 *  
