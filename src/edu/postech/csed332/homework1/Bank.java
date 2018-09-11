@@ -126,7 +126,10 @@ public class Bank {
 
 		// Give informations
 		if (accType == ACCTYPE.HIGH)
-			newbie = new HighInterest(accNumCounter, name, initial);
+			if (initial < 1000)
+				return newbie;
+			else
+				newbie = new HighInterest(accNumCounter, name, initial);
 		else
 			newbie = new LowInterest(accNumCounter, name, initial);
 		
